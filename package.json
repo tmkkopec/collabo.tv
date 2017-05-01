@@ -1,0 +1,19 @@
+{
+  "name": "web-rtc",
+  "version": "1.0.0",
+  "description": "web-rtc example",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/nodemon/bin/nodemon.js index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2",
+    "serve-favicon": "^2.4.2",
+    "webrtc.io": "0.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
