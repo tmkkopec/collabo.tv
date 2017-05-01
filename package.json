@@ -1,7 +1,7 @@
 {
-  "name": "web-rtc",
+  "name": "collabo.tv",
   "version": "1.0.0",
-  "description": "web-rtc example",
+  "description": "collaborative movie watching app with use od webRTC",
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/nodemon/bin/nodemon.js index.js"
