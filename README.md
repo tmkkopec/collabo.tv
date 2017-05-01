@@ -1,11 +1,9 @@
 # collabo.tv
 
-----
 ## Requirements
 * node.js
 * npm (included in node.js)
 
-----
 ## Usage
 * `git clone` repo
 * `cd` to repo
