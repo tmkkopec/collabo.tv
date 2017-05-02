@@ -1,0 +1,23 @@
+{
+  "name": "collabo.tv",
+  "description": "collaborative move watching app with use of webRTC",
+  "main": "index.js",
+  "authors": [
+    "\"\""
+  ],
+  "license": "ISC",
+  "keywords": [
+    "webRTC"
+  ],
+  "homepage": "https://github.com/tmkkopec/collabo.tv",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "material-design-lite": "^1.3.0"
+  }
+}

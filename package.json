@@ -1,7 +1,11 @@
 {
   "name": "collabo.tv",
   "version": "1.0.0",
-  "description": "collaborative movie watching app with use od webRTC",
+  "description": "collaborative movie watching app with use of webRTC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tmkkopec/collabo.tv"
+  },
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/nodemon/bin/nodemon.js index.js"
@@ -14,6 +18,7 @@
     "webrtc.io": "0.0.4"
   },
   "devDependencies": {
+    "cookie-parser": "^1.4.3",
     "nodemon": "^1.11.0"
   }
 }
