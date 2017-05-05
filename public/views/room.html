@@ -8,7 +8,10 @@
     <!-- Material Design icon font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script type="text/javascript" src="/static/bower_components/material-design-lite/material.js"></script>
-    <title>Room - collabo.tv</title>
+    <script src="/static/js/main.js"></script>
+	<title>Room - collabo.tv</title>
+	
+
 </head>
 
 <body>
@@ -30,7 +33,7 @@
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--12-col">
                         <div class="page-content">
-                            <div id="video1">
+                            <div id="video">
                                 <iframe width="320" height="240" src="https://www.youtube.com/embed/drPx0OPav8o"></iframe>
                             </div>
                         </div>
@@ -39,13 +42,19 @@
             </section>
             <section class="mdl-layout__tab-panel" id="scroll-tab-2">
                 <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--12-col">
-                        <div class="page-content">
-                            <div id="video2">
-                                <iframe width="320" height="240" src="https://www.youtube.com/embed/OtRRUEs3o0c"></iframe>
-                            </div>
-                        </div>
-                    </div>
+				<div>
+				Wideo to play: <input type="text" id="wideoUrl" placeholder="enter url">
+
+				<p>Wprowadz url(np VaO0ZRSphjc) i kliknij przycisk.</p>
+
+				<button onclick="Initiate()">PLAY</button>
+				
+				</div>
+                    	<div class="youtube"
+							 id="wideoId" 
+							 style="width: 500px; height: 281px;">
+						</div>
+
                 </div>
             </section>
             <!-- <footer class="mdl-mini-footer">
