@@ -8,6 +8,10 @@ var express = require('express'),
     cookieParser = require('cookie-parser');
 
 var port = process.env.PORT || 3000;
+var os = require('os');
+var nodeStatic = require('node-static');
+var http = require('http');
+var socketIO = require('socket.io');
 
 app.use(cookieParser());
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
@@ -43,7 +47,7 @@ app.get('/debug', function (req, res) {
 var server = app.listen(port, function () {
     console.log("App started on port 3000");
 });
-var io = require('socket.io').listen(server);
+var io = socketIO.listen(server);
 io.sockets.on('connection', function(socket) {
 
     // convenience function to log server messages on the client
