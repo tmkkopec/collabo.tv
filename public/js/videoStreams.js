@@ -93,7 +93,7 @@
         yourVideo = $('#yourVideo')[0];
 
         // getting local media
-        getUserMedia(
+        navigator.mediaDevices.getUserMedia(
             {
                 "audio":true, "video":true
             },
