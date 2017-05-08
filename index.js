@@ -44,9 +44,8 @@ app.get('/debug', function (req, res) {
     res.send(req.cookies);
 });
 
-var server = app.listen(port, function () {
-    console.log("App started on port 3000");
-});
+var server = require('http').createServer(app);  
+server.listen(port);  
 var io = socketIO.listen(server);
 io.sockets.on('connection', function(socket) {
 

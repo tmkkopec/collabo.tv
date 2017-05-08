@@ -103,6 +103,7 @@ navigator.mediaDevices.getUserMedia({
     });
 
 function gotStream(stream) {
+	localVideo = document.querySelector('#localVideo');
     console.log('Adding local stream.');
     localVideo.src = window.URL.createObjectURL(stream);
     localStream = stream;
@@ -174,6 +175,7 @@ function handleIceCandidate(event) {
 
 function handleRemoteStreamAdded(event) {
     console.log('Remote stream added.');
+	remoteVideo = document.querySelector('#remoteVideo');
     remoteVideo.src = window.URL.createObjectURL(event.stream);
     remoteStream = event.stream;
 }
@@ -237,6 +239,7 @@ function requestTurn(turnURL) {
 }
 
 function handleRemoteStreamAdded(event) {
+    remoteVideo = document.querySelector('#remoteVideo');
     console.log('Remote stream added.');
     remoteVideo.src = window.URL.createObjectURL(event.stream);
     remoteStream = event.stream;
