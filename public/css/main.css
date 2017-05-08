@@ -26,3 +26,7 @@
     opacity: 1;
     filter: alpha(opacity=100);
 }
+video {
+  max-width: 100%;
+  width: 320px;
+}
