@@ -15,8 +15,8 @@
   "dependencies": {
     "express": "^4.15.2",
     "serve-favicon": "^2.4.2",
-    "webrtc.io": "0.0.4"
-	"socket.io": "1.2.0"
+    "webrtc.io": "0.0.4",
+	"socket.io": "1.4.0"
   },
   "devDependencies": {
     "cookie-parser": "^1.4.3",
