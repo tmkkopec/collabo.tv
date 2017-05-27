@@ -5,18 +5,13 @@
     <link rel="stylesheet" type="text/css" href="/static/bower_components/material-design-lite/material.min.css">
     <link rel="stylesheet" type="text/css" href="/static/css/main.css">
     <link rel="icon" href="/static/favicon.ico">
-    <!-- Material Design icon font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script type="text/javascript" src="/static/bower_components/material-design-lite/material.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="/static/bower_components/socket.io-client/dist/socket.io.js"></script>
     <script src="/static/js/main.js"></script>
-    <script src="/static/js/lib/adapter.js"></script>
+    <script src="/static/bower_components/webrtc-adapter/release/adapter.js"></script>
     <script src="/static/js/video_streams.js"></script>
-
-
     <title>Room - collabo.tv</title>
-
-
 </head>
 
 <body>
@@ -42,10 +37,10 @@
                             <iframe width="320" height="240" src="https://www.youtube.com/embed/drPx0OPav8o"></iframe>
                         </div>
                         </br>
-						<div class="broadcast">
+                        <div class="broadcast">
                             <video id="localVideo" autoplay></video>
                             <video id="remoteVideo" autoplay></video>
-						</div>
+                        </div>
                     </div>
                 </div>
             </div>
