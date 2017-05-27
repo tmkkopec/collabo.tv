@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const express = require('express'),
     app = express(),
@@ -8,7 +8,8 @@ const express = require('express'),
     os = require('os'),
     http = require('http'),
     socketIO = require('socket.io'),
-    port = process.env.PORT || 3000;
+    port = process.env.PORT || 3000,
+    cookieExpiration = 600000;
 
 app.use(cookieParser());
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -20,13 +21,13 @@ app.get('/', function (req, res) {
 
 app.get('/join', function (req, res) {
     const query = req.query.nickname.split('@');
-    res.cookie('nickname', query[0], {expires: new Date(Date.now() + 60000)});
+    res.cookie('nickname', query[0], {expires: new Date(Date.now() + cookieExpiration)});
     res.redirect('/room/' + query[1]);
 });
 
 app.get('/room/:id', function (req, res) {
     if (req.cookies.nickname)
-        res.sendFile(path.join(__dirname, 'public', 'views', 'room.html'));
+        res.sendFile(path.join(__dirname, 'public', 'views', 'home.html'));
     else
         res.redirect('/');
 });
