@@ -12,26 +12,28 @@
 </head>
 
 <body>
-    <div>
-        <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col">
-                <h3 class="mdl-typography--display-4 mdl-color-text--grey-600">Collabo.tv</h3>
-            </div>
-        </div>
-        <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col">
-                <form action="/join" method="GET" name="login_form" onsubmit="return validateInput()">
-                    <div id="form_div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <label class="mdl-textfield__label" for="nickname">nickname@room</label>
-                        <input class="mdl-textfield__input" type="text" name="nickname" id="nickname" pattern="\w+@\w+" />
-                        <span class="mdl-textfield__error">Not a valid input</span>
-                    </div>
-                    <br/>
-                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored" type="submit" for="form_div">Join a room!</button>
-                </form>
-            </div>
+<div>
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+            <h3 class="mdl-typography--display-4 mdl-color-text--grey-600">Collabo.tv</h3>
         </div>
     </div>
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+            <form action="/join" method="GET" name="login_form" onsubmit="return validateInput()">
+                <div id="form_div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <label class="mdl-textfield__label" for="nickname">nickname@room</label>
+                    <input class="mdl-textfield__input" type="text" name="nickname" id="nickname" pattern="\w+@\w+"/>
+                    <span class="mdl-textfield__error">Not a valid input</span>
+                </div>
+                <br/>
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored"
+                        type="submit" for="form_div">Join a room!
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>
