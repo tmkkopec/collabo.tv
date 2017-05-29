@@ -191,8 +191,7 @@ function onCreateSessionDescriptionError(error) {
 function handleRemoteStreamRemoved(event) {
     console.log('Remote stream removed. Event: ', event);
 }
-function handleRemoteHangup()
-{
+function handleRemoteHangup() {
     console.log('Session terminated.');
     stop();
     isInitiator = false;
