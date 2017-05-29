@@ -44,10 +44,10 @@ app.get('/debug', function (req, res) {
     res.send(req.cookies);
 });
 
-var server = require('http').createServer(app);  
-server.listen(port);  
+var server = require('http').createServer(app);
+server.listen(port);
 var io = socketIO.listen(server);
-io.sockets.on('connection', function(socket) {
+io.sockets.on('connection', function (socket) {
 
     // convenience function to log server messages on the client
     function log() {
@@ -56,18 +56,17 @@ io.sockets.on('connection', function(socket) {
         socket.emit('log', array);
     }
 
-    socket.on('message', function(message) {
+    socket.on('message', function (message) {
         log('Client said: ', message);
         // for a real app, would be room-only (not broadcast)
         socket.broadcast.emit('message', message);
     });
 
-    socket.on('create or join', function(room) {
+    socket.on('create or join', function (room) {
         log('Received request to create or join room ' + room);
 
 
-
-        let  clientsInRoom = io.nsps['/'].adapter.rooms[room];
+        let clientsInRoom = io.nsps['/'].adapter.rooms[room];
         let numClients = clientsInRoom === undefined ? 0 : Object.keys(clientsInRoom.sockets).length;
 
         if (numClients === 2) {
@@ -92,10 +91,10 @@ io.sockets.on('connection', function(socket) {
         }
     });
 
-    socket.on('ipaddr', function() {
+    socket.on('ipaddr', function () {
         var ifaces = os.networkInterfaces();
         for (var dev in ifaces) {
-            ifaces[dev].forEach(function(details) {
+            ifaces[dev].forEach(function (details) {
                 if (details.family === 'IPv4' && details.address !== '127.0.0.1') {
                     socket.emit('ipaddr', details.address);
                 }
@@ -103,7 +102,7 @@ io.sockets.on('connection', function(socket) {
         }
     });
 
-    socket.on('bye', function(){
+    socket.on('bye', function () {
         console.log('received bye');
     });
 
