@@ -22,7 +22,10 @@ var sdpConstraints = {
 
 /////////////////////////////////////////////
 
-var room = 'foo';
+let  url = window.location.href;
+let splitted_url = url.split("/");
+let room=splitted_url[splitted_url.length-1];
+
 // Could prompt for room name:
 // room = prompt('Enter room name:');
 
