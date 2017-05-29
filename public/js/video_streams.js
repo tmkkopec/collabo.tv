@@ -237,14 +237,6 @@ function requestTurn(turnURL) {
         xhr.send();
     }
 }
-
-function handleRemoteStreamAdded(event) {
-    remoteVideo = document.querySelector('#remoteVideo');
-    console.log('Remote stream added.');
-    remoteVideo.src = window.URL.createObjectURL(event.stream);
-    remoteStream = event.stream;
-}
-
 function handleRemoteStreamRemoved(event) {
     console.log('Remote stream removed. Event: ', event);
 }
