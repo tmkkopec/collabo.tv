@@ -63,23 +63,29 @@ io.sockets.on('connection', function (socket) {
         log('Received request to create or join room ' + room);
 
 
-        const abc = io.sockets.sockets;
-        const numClients = Object.keys(abc).length;
-        log('Room ' + room + ' now has ' + numClients + ' client(s)');
 
-        if (numClients === 1) {
+        let  clientsInRoom = io.nsps['/'].adapter.rooms[room];
+        let numClients = clientsInRoom === undefined ? 0 : Object.keys(clientsInRoom.sockets).length;
+
+        if (numClients === 2) {
+            socket.emit('full', room);
+            return;
+        }
+
+        log('Room ' + room + ' now has ' + (numClients) + ' client(s)');
+
+
+        if (numClients === 0) {
             socket.join(room);
             log('Client ID ' + socket.id + ' created room ' + room);
             socket.emit('created', room, socket.id);
 
-        } else if (numClients === 2) {
+        } else {
             log('Client ID ' + socket.id + ' joined room ' + room);
             io.sockets.in(room).emit('join', room);
             socket.join(room);
             socket.emit('joined', room, socket.id);
             io.sockets.in(room).emit('ready');
-        } else { // max two clients
-            socket.emit('full', room);
         }
     });
 
