@@ -14,3 +14,17 @@ video {
 .broadcast .mdl-grid {
     text-align: center;
 }
+
+.addButton {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.modalDialog input {
+    padding: 5px;
+}
+
+.modalDialog *:not(:last-child) {
+    margin-bottom: 10px;
+}

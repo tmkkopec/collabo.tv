@@ -2,6 +2,7 @@
 
 const React = require('react');
 const PropTypes = require('prop-types');
+const uniqueId = require('lodash/uniqueId');
 
 class Tab extends React.Component {
     constructor(props) {
@@ -9,17 +10,31 @@ class Tab extends React.Component {
     }
 
     render() {
-        return <a href={'#scroll-tab-' + this.props.id} className="mdl-layout__tab is-active">Room a</a>
+        return <a href={'#scroll-tab-' + this.props.id} className="mdl-layout__tab">
+            Room {this.props.id}
+        </a>
     }
 }
 
 Tab.propTypes = {
-    id: PropTypes.number.isRequired
+    id: PropTypes.string.isRequired
 };
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    // force upgrading dynamic elements for mdl framework. TODO find better solution
+    componentDidUpdate() {
+        const layout = document.querySelector('.mdl-js-layout');
+        window.setTimeout(function () {
+            const tabs = document.querySelectorAll('.mdl-layout__tab');
+            const panels = document.querySelectorAll('.mdl-layout__tab-panel');
+            for (let i = 0; i < tabs.length; i++) {
+                new MaterialLayoutTab(tabs[i], tabs, panels, layout.MaterialLayout);
+            }
+        }, 500);
     }
 
     render() {
@@ -34,7 +49,7 @@ class Header extends React.Component {
                     </nav>
                 </div>
                 <div className="mdl-layout__tab-bar mdl-js-ripple-effect">
-                    {this.props.roomIDs.map((element) => <Tab id={element} key={'t' + element}/>)}
+                    {this.props.roomIDs.map((roomID) => <Tab id={roomID} key={uniqueId()}/>)}
                 </div>
             </header>
         )
@@ -43,7 +58,7 @@ class Header extends React.Component {
 
 Header.propTypes = {
     onLogout: PropTypes.func,
-    roomIDs: PropTypes.arrayOf(PropTypes.number).isRequired
+    roomIDs: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default Header;

@@ -22,6 +22,7 @@ app.get('/', function (req, res) {
 app.get('/join', function (req, res) {
     const query = req.query.nickname.split('@');
     res.cookie('nickname', query[0], {expires: new Date(Date.now() + cookieExpiration)});
+    res.cookie('initialRoom', query[1], {expires: new Date(Date.now() + cookieExpiration)});
     res.redirect('/room/' + query[1]);
 });
 

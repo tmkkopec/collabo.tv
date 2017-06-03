@@ -2,8 +2,10 @@
 
 const React = require('react');
 const PropTypes = require('prop-types');
+const uniqueId = require('lodash/uniqueId');
 import MdlGrid from './MdlGrid';
 import MdlCell from './MdlCell';
+import AddDialog from './AddDialog';
 import global from '../videoStreams';
 
 class Section extends React.Component {
@@ -26,12 +28,12 @@ class Section extends React.Component {
 
     render() {
         return (
-            <section className="mdl-layout__tab-panel is-active" id={'scroll-tab-' + this.props.id}>
+            <section className="mdl-layout__tab-panel" id={'scroll-tab-' + this.props.id}>
                 <MdlGrid>
                     <MdlCell cellWidth={12}>
                         <div className="page-content">
                             <div id="video">
-                                <iframe src="https://www.youtube.com/embed/drPx0OPav8o"/>
+                                <iframe src=""/>
                             </div>
                             <div className="broadcast">
                                 <MdlGrid>
@@ -40,7 +42,7 @@ class Section extends React.Component {
                                     </MdlCell>
                                     {this.state.remoteVideoIDs.map((videoID) =>
                                         <MdlCell cellWidth={12 / (this.state.remoteVideoIDs.length + 1)}>
-                                            <video id={'remote' + videoID} key={'v' + videoID} autoPlay/>
+                                            <video id={'remote' + videoID} key={uniqueId()} autoPlay/>
                                         </MdlCell>)}
                                 </MdlGrid>
                             </div>
@@ -53,7 +55,7 @@ class Section extends React.Component {
 }
 
 Section.propTypes = {
-    id: PropTypes.number.isRequired
+    id: PropTypes.string.isRequired
 };
 
 global.createRemoteView = Section.createRemoteView;
@@ -69,14 +71,16 @@ class SectionsController extends React.Component {
     render() {
         return (
             <main className="mdl-layout__content">
-                {this.props.sectionIDs.map((element) => <Section id={element} key={'s' + element}/>)}
+                {this.props.sectionIDs.map((element) => <Section id={element} key={uniqueId()}/>)}
+                <AddDialog addRoom={this.props.addRoom}/>
             </main>
         )
     }
 }
 
 SectionsController.propTypes = {
-    sectionIDs: PropTypes.arrayOf(PropTypes.number).isRequired
+    addRoom: PropTypes.func.isRequired,
+    sectionIDs: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default SectionsController;

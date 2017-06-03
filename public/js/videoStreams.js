@@ -6,16 +6,11 @@ let isChannelReady = false,
     localStream,
     pc,
     remoteStream,
-    turnReady,
-    pcConfig = {
-        'iceServers': [{
-            'url': 'stun:stun.l.google.com:19302'
-        }]
-    };
+    eventHolder = {};
 
-let room = 'foo';
-// Could prompt for room name:
-// room = prompt('Enter room name:');
+let url = window.location.href;
+let splitted_url = url.split("/");
+let room = splitted_url[splitted_url.length - 1];
 
 let socket = io.connect();
 
@@ -69,8 +64,6 @@ socket.on('message', function (message) {
         handleRemoteHangup();
     }
 });
-
-let event1 = {};
 
 function gotStream(stream) {
     let localVideo = global.getLocalView();
@@ -130,13 +123,13 @@ function handleIceCandidate(event) {
 
 function handleRemoteStreamAdded(event) {
     console.log('Remote stream added.');
-    event1 = event;
+    eventHolder = event;
     global.createRemoteView();
 }
 
 function callbackRemoteStreamAdded(div) {
-    div.srcObject = event1.stream;
-    remoteStream = event1.stream;
+    div.srcObject = eventHolder.stream;
+    remoteStream = eventHolder.stream;
 }
 
 function handleCreateOfferError(event) {
@@ -168,43 +161,8 @@ function onCreateSessionDescriptionError(error) {
     trace('Failed to create session description: ' + error.toString());
 }
 
-
-function requestTurn(turnURL) {
-    var turnExists = false;
-    for (var i in pcConfig.iceServers) {
-        if (pcConfig.iceServers[i].url.substr(0, 5) === 'turn:') {
-            turnExists = true;
-            turnReady = true;
-            break;
-        }
-    }
-    if (!turnExists) {
-        console.log('Getting TURN server from ', turnURL);
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var turnServer = JSON.parse(xhr.responseText);
-                console.log('Got TURN server: ', turnServer);
-                pcConfig.iceServers.push({
-                    'url': 'turn:' + turnServer.username + '@' + turnServer.turn,
-                    'credential': turnServer.password
-                });
-                turnReady = true;
-            }
-        };
-        xhr.open('GET', turnURL, true);
-        xhr.send();
-    }
-}
-
 function handleRemoteStreamRemoved(event) {
     console.log('Remote stream removed. Event: ', event);
-}
-
-function hangup() {
-    console.log('Hanging up.');
-    stop();
-    sendMessage('bye');
 }
 
 function handleRemoteHangup() {
@@ -229,7 +187,7 @@ global.getNewView = (div) => {
 
 navigator.mediaDevices
     .getUserMedia({
-        audio: false,
+        audio: true,
         video: true
     })
     .then(gotStream)
@@ -240,11 +198,5 @@ navigator.mediaDevices
 window.onbeforeunload = function () {
     sendMessage('bye');
 };
-
-if (location.hostname !== 'localhost') {
-    requestTurn(
-        'https://computeengineondemand.appspot.com/turn?username=41784574&key=4080218913'
-    );
-}
 
 export default global;
