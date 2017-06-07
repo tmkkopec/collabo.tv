@@ -2,6 +2,7 @@
 
 const React = require('react');
 const PropTypes = require('prop-types');
+const uniqueId = require('lodash/uniqueId');
 
 class Tab extends React.Component {
     constructor(props) {
@@ -9,12 +10,12 @@ class Tab extends React.Component {
     }
 
     render() {
-        return <a href={'#scroll-tab-' + this.props.id} className="mdl-layout__tab is-active">Room a</a>
+        return <a href={'#scroll-tab-' + this.props.id} className="mdl-layout__tab is-active">Room {this.props.id}</a>
     }
 }
 
 Tab.propTypes = {
-    id: PropTypes.number.isRequired
+    id: PropTypes.string.isRequired
 };
 
 class Header extends React.Component {
@@ -34,7 +35,7 @@ class Header extends React.Component {
                     </nav>
                 </div>
                 <div className="mdl-layout__tab-bar mdl-js-ripple-effect">
-                    {this.props.roomIDs.map((element) => <Tab id={element} key={'t' + element}/>)}
+                    {this.props.roomIDs.map((element) => <Tab id={element} key={uniqueId()}/>)}
                 </div>
             </header>
         )
@@ -43,7 +44,7 @@ class Header extends React.Component {
 
 Header.propTypes = {
     onLogout: PropTypes.func,
-    roomIDs: PropTypes.arrayOf(PropTypes.number).isRequired
+    roomIDs: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default Header;
