@@ -4,7 +4,6 @@ function handleAPILoaded() {
 }
 
 var first = true;
-var divs = []
 
 function search() {
     var q = $('#query').val();
@@ -17,30 +16,23 @@ function search() {
         var img;
         if(first){
 
-            for(i = 0; i<5; i++){
+            for(i = 1; i<=5; i++){
+
+                var url = response.result['items'][i-1].snippet.thumbnails['default'].url;
+                var imghtml = '<img src="'+url+'">';
                 container.appendChild(document.createElement('div'));
                 container.childNodes[i].id = "image"+i;
                 console.log(container.childNodes[i]);
-                img = new Image();
-                var div = document.getElementById('image'+1);
-                img.onload = function() {
-                    div.appendChild(img);
-                    //divs[i].appendChild(img);
-                }
-                img.src = response.result['items'][i].snippet.thumbnails['default'].url;
+
+                document.getElementById('image'+i).innerHTML = imghtml;
             }
             first = false;
         }
         else{
-            for(i=0;i<5;i++){
-                var img = new Image();
-                img.onload = function() {
-                    divs[i].childNodes[0] = img;
-                    //divs[i].removeChild(divs[i].childNodes[0]);
-                    //divs[i].appendChild(img);
-
-                }
-                img.src = response.result['items'][i].snippet.thumbnails['default'].url;
+            for(i=1;i<=5;i++){
+                var url = response.result['items'][i-1].snippet.thumbnails['default'].url;
+                var imghtml = '<img src="'+url+'">';
+                document.getElementById('image'+i).innerHTML = imghtml;
 
             }
         }
