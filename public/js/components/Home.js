@@ -1,25 +1,31 @@
 'use strict';
 
 const React = require('react');
+const PropTypes = require('prop-types');
 import Header from './Header';
 import SectionsController from "./SectionsController";
 import Drawer from './Drawer';
+import $ from 'jquery';
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            roomIDs: [1]
+            roomIDs: [this.props.roomID]
         }
     }
 
     onLogout() {
-        console.log("TODO handle logout");
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: '/logout'
+        });
     }
 
     render() {
         return (
-            <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <div className="mdl-layout mdl-js-layout mdl-layout--fixed-tabs mdl-layout--fixed-header">
                 <Header onLogout={this.onLogout} roomIDs={this.state.roomIDs}/>
                 <Drawer/>
                 <SectionsController sectionIDs={this.state.roomIDs}/>
@@ -28,5 +34,9 @@ class Home extends React.Component {
     }
 
 }
+
+Home.propTypes = {
+    roomID: PropTypes.string.isRequired
+};
 
 export default Home;
