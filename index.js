@@ -1,5 +1,14 @@
 "use strict";
 
+var WebSocket = require("ws");
+var WebSocketServer = require('ws').Server;
+var wss = new WebSocketServer({port: 8088});
+
+
+var wsList = [];
+
+
+
 var express = require('express'),
     app = express(),
     path = require('path'),
@@ -8,6 +17,27 @@ var express = require('express'),
     cookieParser = require('cookie-parser');
 
 var port = process.env.PORT || 3000;
+
+wss.on('connection', function(ws){
+	console.log('WS connection established!')
+	wsList.push(ws);
+	var username=(wsList.indexOf(ws)).toString();
+	var json = { username: username, id:"name"}
+	ws.send(JSON.stringify(json));
+	
+	ws.on('close', function(){
+		wsList.splice(wsList.indexOf(ws),1);
+		console.log('WS closed!')
+	});
+
+	ws.on('message', function(message){
+		console.log('Got ws message: '+message);
+		for(var i=0;i<wsList.length;i++){
+			// send to everybody on the site
+			wsList[i].send(message);
+		}
+	});
+});
 
 app.use(cookieParser());
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))

@@ -7,7 +7,9 @@
     <link rel="icon" href="/static/favicon.ico">
     <!-- Material Design icon font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script type="text/javascript" src="/static/bower_components/material-design-lite/material.js"></script>
+   
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script type="text/javascript" src="/static/bower_components/material-design-lite/material.js"></script>
     <script src="/static/js/main.js"></script>
 	<title>Room - collabo.tv</title>
 	
@@ -29,43 +31,30 @@
             <span class="mdl-layout-title">Collabo.tv</span>
         </div>
         <main class="mdl-layout__content">
-            <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+            
                 <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--12-col">
-                        <div class="page-content">
-                            <div id="video">
-                                <iframe width="320" height="240" src="https://www.youtube.com/embed/drPx0OPav8o"></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="mdl-layout__tab-panel" id="scroll-tab-2">
-                <div class="mdl-grid">
-				<div>
-				Wideo to play: <input type="text" id="wideoUrl" placeholder="enter url">
 
-				<p>Wprowadz url(np VaO0ZRSphjc) i kliknij przycisk.</p>
+    <div>
+                    Wideo to play: <input type="text" id="wideoUrl" placeholder="enter url">
 
-				<button onclick="Initiate()">PLAY</button>
-				
-				</div>
-                    	<div class="youtube"
-							 id="wideoId" 
-							 style="width: 500px; height: 281px;">
-						</div>
+                    <p>Wprowadz url(np VaO0ZRSphjc) i kliknij przycisk.</p>
 
-                </div>
-            </section>
-            <!-- <footer class="mdl-mini-footer">
-                <div class="mdl-mini-footer__left-section">
-                    <div class="mdl-logo">Collabo.tv</div>
-                    <ul class="mdl-mini-footer__link-list">
-                        <li><a href="#">Help</a></li>
-                        <li><a href="#">Privacy & Terms</a></li>
-                    </ul>
-                </div>
-            </footer>           -->
+                    <button onclick="Initiate()">Select</button>
+					<button onclick="PlayForAll()">Play</button>
+	 <button onclick="PauseForAll()">Pause</button>
+	<div>
+      
+            <button id="dc-connect" onclick="connectTo()"> Connect to</button>
+        
+        
+	</div>
+    </div>
+		<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+	<div id="player">
+	 
+	</div>
+
+
         </main>
     </div>
 </body>
