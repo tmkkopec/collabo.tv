@@ -13812,7 +13812,7 @@ class MdlGrid extends React.Component {
     }
 }
 
-module.exports = MdlGrid;Ś;
+module.exports = MdlGrid;
 
 /***/ }),
 /* 113 */
