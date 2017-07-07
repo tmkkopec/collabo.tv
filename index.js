@@ -6,10 +6,19 @@ const express = require('express'),
     favicon = require('serve-favicon'),
     cookieParser = require('cookie-parser'),
     os = require('os'),
-    http = require('http'),
+    https = require('https'),
     socketIO = require('socket.io'),
+    fs = require('fs'),
     port = process.env.PORT || 3000,
     cookieExpiration = 600000;
+
+const certsPath = path.join(__dirname, 'certs');
+const options = {
+    key: fs.readFileSync(path.join(certsPath, 'server.key')),
+    cert: fs.readFileSync(path.join(certsPath, 'server.crt')),
+    requestCert: false,
+    rejectUnauthorized: true
+};
 
 app.use(cookieParser());
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -48,8 +57,7 @@ app.get('/debug', function (req, res) {
     res.send(req.cookies);
 });
 
-const server = http.createServer(app);
-server.listen(port);
+const server = https.createServer(options, app).listen(port);
 const io = socketIO.listen(server);
 io.sockets.on('connection', function (socket) {
 
@@ -68,7 +76,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('create or join', function (room) {
         log('Received request to create or join room ' + room);
 
-        let  clientsInRoom = io.nsps['/'].adapter.rooms[room];
+        let clientsInRoom = io.nsps['/'].adapter.rooms[room];
         let numClients = clientsInRoom === undefined ? 0 : Object.keys(clientsInRoom.sockets).length;
 
         log('Room ' + room + ' now has ' + (numClients) + ' client(s)');
