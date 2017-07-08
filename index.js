@@ -7,8 +7,8 @@ const express = require('express'),
     cookieParser = require('cookie-parser'),
     os = require('os'),
     https = require('https'),
-    socketIO = require('socket.io'),
     fs = require('fs'),
+    socketIO = require('socket.io'),
     port = process.env.PORT || 3000,
     cookieExpiration = 600000;
 
@@ -76,23 +76,17 @@ io.sockets.on('connection', function (socket) {
     socket.on('create or join', function (room) {
         log('Received request to create or join room ' + room);
 
-        let clientsInRoom = io.nsps['/'].adapter.rooms[room];
-        let numClients = clientsInRoom === undefined ? 0 : Object.keys(clientsInRoom.sockets).length;
+        const abc = io.sockets.sockets;
+        const numClients = Object.keys(abc).length;
+        log('Room ' + room + ' now has ' + numClients + ' client(s)');
 
-        log('Room ' + room + ' now has ' + (numClients) + ' client(s)');
-
-
-        if (numClients === 2) {
-            socket.emit('full', room);
-            return;
-        }
-        if (numClients === 0) {
+        if (numClients === 1) {
             socket.join(room);
-            log('Client ID ' + socket.id + ' created room ' + room);
+            log(socket.id, room);
             socket.emit('created', room, socket.id);
 
         } else {
-            log('Client ID ' + socket.id + ' joined room ' + room);
+            log(socket.id, room);
             io.sockets.in(room).emit('join', room);
             socket.join(room);
             socket.emit('joined', room, socket.id);
